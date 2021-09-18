@@ -36,6 +36,7 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actionRender"/>
+   <addaction name="actioncreateRect"/>
   </widget>
   <action name="actionRender">
    <property name="text">
@@ -43,6 +44,14 @@
    </property>
    <property name="toolTip">
     <string>Render</string>
+   </property>
+  </action>
+  <action name="actioncreateRect">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>createRect</string>
    </property>
   </action>
  </widget>

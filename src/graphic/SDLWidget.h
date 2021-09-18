@@ -16,6 +16,7 @@ public:
 	SDLWidget(QWidget* parent);
 	virtual ~SDLWidget() override;
 
+
 	/* A custom repaint slot, I'll explain this later */
 public slots:
 	void SDLRepaint();

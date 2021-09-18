@@ -6,6 +6,8 @@
 #include <QDebug>
 #include <QMouseEvent>
 
+#include "Example.h"
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -36,6 +38,8 @@ MainWindow::MainWindow(QWidget *parent)
 	});
 
 	connect(ui->centralwidget, &Example::sigal_mousePos, this, &MainWindow::slot_PrintMousePos);
+
+	connect(ui->actioncreateRect, &QAction::toggled, ui->centralwidget, &Example::slot_toggleRectTool);
 }
 
 MainWindow::~MainWindow()
