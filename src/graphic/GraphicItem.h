@@ -1,6 +1,8 @@
 ﻿#pragma once
 #include <string>
 
+struct SDL_Renderer;
+
 class GraphicItem
 {
 public:	
@@ -14,38 +16,40 @@ public:
 
 	virtual ~GraphicItem() {}
 
-	uint32_t GetId() const
+	uint32_t getId() const
 	{
 		return id;
 	}
 
-	void SetId(uint32_t id)
+	void setId(uint32_t id)
 	{
 		this->id = id;
 	}
 
-	std::string GetName() const
+	std::string getName() const
 	{
 		return name;
 	}
 
-	void SetName(const std::string& name)
+	void setName(const std::string& name)
 	{
 		this->name = name;
 	}
 
-	Type GetType() const
+	Type getType() const
 	{
 		return type;
 	}
 
-	void SetType(Type type)
+	void setType(Type type)
 	{
 		this->type = type;
 	}
 
+	virtual void render(SDL_Renderer* renderer) = 0;
+
 protected:
 	uint32_t id;
 	std::string name;
-	Type type = Type::rect;
+	Type type = Type::none;
 };

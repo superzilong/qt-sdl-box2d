@@ -5,6 +5,8 @@
 
 #include <QMainWindow>
 
+#include "CAD/RectOperator.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -24,6 +26,8 @@ private:
 
 	Ui::MainWindow *ui;
 	int idx = 0;
+
+	std::shared_ptr<RectOperator> m_pRectOperator;
 
 private slots:
 	void slot_PrintMousePos(const QPoint& pos);

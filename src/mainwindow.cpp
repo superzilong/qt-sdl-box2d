@@ -6,7 +6,7 @@
 #include <QDebug>
 #include <QMouseEvent>
 
-#include "Example.h"
+#include "GraphicWidget.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
 	setMouseTracking(true);
 	centralWidget()->setMouseTracking(true);
 	
-	setWindowTitle("QMainWindow SDL Rendering Example");
+	setWindowTitle("QMainWindow SDL Rendering GraphicWidget");
 	setBaseSize(640, 480);
 	resize(640, 480);
 
@@ -37,9 +37,21 @@ MainWindow::MainWindow(QWidget *parent)
 		render();
 	});
 
-	connect(ui->centralwidget, &Example::sigal_mousePos, this, &MainWindow::slot_PrintMousePos);
+	connect(ui->centralwidget, &GraphicWidget::signal_mousePos, this, &MainWindow::slot_PrintMousePos);
 
-	connect(ui->actioncreateRect, &QAction::toggled, ui->centralwidget, &Example::slot_toggleRectTool);
+	connect(ui->actioncreateRect, &QAction::toggled, ui->centralwidget, [this](bool bCheck)
+	{
+		if (bCheck)
+		{
+			std::shared_ptr<RectOperator> spRectOperator =  std::make_shared<RectOperator>();
+			ui->centralwidget->slot_setCADTool(spRectOperator);
+			connect(spRectOperator.get(), &CADOperator::signal_exit, this, [this]() {ui->actioncreateRect->setChecked(false); });
+		}
+		else
+		{
+			ui->centralwidget->slot_setCADTool(nullptr);
+		}
+	});
 }
 
 MainWindow::~MainWindow()

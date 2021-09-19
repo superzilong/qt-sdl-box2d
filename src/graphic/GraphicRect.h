@@ -8,8 +8,7 @@ class GraphicRect : public GraphicItem
 public:
 	static uint32_t s_id;
 
-	GraphicRect()
-		: GraphicItem()
+	GraphicRect() : GraphicItem()
 	{
 		id = s_id++;
 		name = QString("Rect_%1").arg(id).toStdString();
@@ -57,6 +56,8 @@ public:
 	{
 		this->height = height;
 	}
+
+	void render(SDL_Renderer* renderer) override;
 
 private:
 	double x = 0;

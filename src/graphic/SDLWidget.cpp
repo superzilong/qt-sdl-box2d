@@ -50,7 +50,7 @@ void SDLWidget::showEvent(QShowEvent*) {
 	/* frameTimer will send signal timeout() every 60th of a second, connect to "repaint" */
 	connect(&frameTimer, &QTimer::timeout, this, &SDLWidget::SDLRepaint);
 	frameTimer.setInterval(MS_PER_FRAME);
-	//frameTimer.start();
+	frameTimer.start();
 }
 
 /* Override default system paint engine to prevent errors. */

@@ -2,7 +2,7 @@
 #pragma once
 #include <QWidget>
 #include <QTimer>
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 /* If you'd like, you can just write
  * `#define MS_PER_FRAME 17` here since that's all this is doing,
