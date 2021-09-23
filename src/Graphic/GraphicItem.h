@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <string>
 
+class QTransform;
 struct SDL_Renderer;
 
 class GraphicItem
@@ -46,7 +47,7 @@ public:
 		this->type = type;
 	}
 
-	virtual void render(SDL_Renderer* renderer) = 0;
+	virtual void render(SDL_Renderer* renderer, const QTransform& transform) = 0;
 
 protected:
 	uint32_t id;

@@ -41,7 +41,17 @@ void GraphicWidget::mouseReleaseEvent(QMouseEvent* event)
 	}
 }
 
-void GraphicWidget::Init() {}
+void GraphicWidget::Init()
+{
+	int w = width();
+	int h = height();
+
+	m_viewTransform.scale(50, 50);
+	m_viewTransform.translate(0, -h/(50. * 4));
+
+	m_projectTransfrom.translate(w / 2, h / 2);
+	m_projectTransfrom.scale(1, -1);
+}
 
 void GraphicWidget::Update() {
 	SDL_SetRenderDrawColor(renderer, 0xFF, 0x0, 0x0, 0xFF);
@@ -49,8 +59,17 @@ void GraphicWidget::Update() {
 	auto items = mgr->getItems();
 	for (GraphicItem* item : items)
 	{
-		item->render(renderer);
+		item->render(renderer,  m_viewTransform * m_projectTransfrom);
 	}
 }
 
-void GraphicWidget::OnResize(int, int) {}
+void GraphicWidget::OnResize(int w, int h)
+{
+	m_viewTransform.reset();
+	m_viewTransform.scale(50, 50);
+	m_viewTransform.translate(0, -h / (50 * 4));
+
+	m_projectTransfrom.reset();
+	m_projectTransfrom.translate(w / 2, h / 2);
+	m_projectTransfrom.scale(1, -1);
+}

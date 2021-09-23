@@ -1,8 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include "graphic/GraphicItemManager.h"
-#include "graphic/GraphicRect.h"
+#include "Graphic/GraphicItemManager.h"
+#include "Graphic/GraphicRect.h"
 #include <QDebug>
 #include <QMouseEvent>
 
@@ -23,21 +23,19 @@ MainWindow::MainWindow(QWidget *parent)
 
 	connect(ui->actionRender, &QAction::triggered, this, [this]()
 	{
-		srand(time(NULL));
 		auto rect = new GraphicRect();
-		
-		int x = 20 * idx;
-		int y = 20 * idx;
+		int x = 1 * idx;
+		int y = 1 * idx;
 		rect->setX(x);
 		rect->setY(y);
-		rect->setWidth(20);
-		rect->setHeight(20);
+		rect->setWidth(1);
+		rect->setHeight(1);
 		++idx;
 		GraphicItemManager::instance()->addItem(rect);
 		render();
 	});
 
-	connect(ui->centralwidget, &GraphicWidget::signal_mousePos, this, &MainWindow::slot_PrintMousePos);
+	connect(ui->centralwidget, &GraphicWidget::signal_mousePos, this, &MainWindow::slot_printMousePos);
 
 	connect(ui->actioncreateRect, &QAction::toggled, ui->centralwidget, [this](bool bCheck)
 	{
@@ -64,7 +62,7 @@ void MainWindow::render()
 	this->ui->centralwidget->SDLRepaint();
 }
 
-void MainWindow::slot_PrintMousePos(const QPoint& pos)
+void MainWindow::slot_printMousePos(const QPoint& pos)
 {
 	ui->statusbar->showMessage(QString("x:%1 y:%2").arg(pos.x()).arg(pos.y()));
 }

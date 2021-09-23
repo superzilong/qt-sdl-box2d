@@ -57,7 +57,7 @@ public:
 		this->height = height;
 	}
 
-	void render(SDL_Renderer* renderer) override;
+	void render(SDL_Renderer* renderer, const QTransform& transform) override;
 
 private:
 	double x = 0;

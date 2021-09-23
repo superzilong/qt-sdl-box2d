@@ -30,6 +30,6 @@ private:
 	std::shared_ptr<RectOperator> m_pRectOperator;
 
 private slots:
-	void slot_PrintMousePos(const QPoint& pos);
+	void slot_printMousePos(const QPoint& pos);
 };
 #endif // MAINWINDOW_H

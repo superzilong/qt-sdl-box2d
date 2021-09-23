@@ -1,5 +1,6 @@
 [requires]
 sdl/2.0.16
+box2d/2.4.1
 
 [generators]
 cmake_find_package

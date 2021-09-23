@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 cmake_policy(SET CMP0076 NEW)
 
-project(qt-sdl LANGUAGES CXX)
+project(qt-sdl-box2d LANGUAGES CXX)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 
@@ -57,6 +57,7 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 
 include(${CMAKE_BINARY_DIR}/conan_paths.cmake)
 find_package(SDL2 REQUIRED)
+find_package(box2d REQUIRED)
 
 FILE(GLOB_RECURSE headers "${CMAKE_CURRENT_SOURCE_DIR}/src/*.h")
 FILE(GLOB_RECURSE sources "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
@@ -72,12 +73,13 @@ set(PROJECT_SOURCES
 )
 
 
-add_executable(qt-sdl ${sources} ${headers} ${ui})
+add_executable(qt-sdl-box2d ${sources} ${headers} ${ui})
 
 # add_subdirectory(graphic)
 
-GroupSourcesByFolder(qt-sdl)
+GroupSourcesByFolder(qt-sdl-box2d)
 
-target_link_libraries(qt-sdl PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
-target_link_libraries(qt-sdl PRIVATE SDL2::SDL2)
+target_link_libraries(qt-sdl-box2d PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(qt-sdl-box2d PRIVATE SDL2::SDL2)
+target_link_libraries(qt-sdl-box2d PRIVATE box2d::box2d)
 #set_property(TARGET qt-sdl PROPERTY WIN32_EXECUTABLE true)

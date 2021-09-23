@@ -19,7 +19,7 @@ void RectOperator::keyPressEvent(QKeyEvent* event)
 		else
 		{
 			emit signal_exit();
-		}
+	 	}
 	}
 }
 
