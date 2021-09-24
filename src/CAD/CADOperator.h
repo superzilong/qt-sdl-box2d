@@ -1,6 +1,7 @@
 #pragma	once
 #include <QObject>
 
+class CoordConverter;
 class QMouseEvent;
 class QKeyEvent;
 
@@ -17,4 +18,6 @@ public:
 
 signals:
 	void signal_exit();
+
+
 };

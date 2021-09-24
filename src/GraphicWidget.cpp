@@ -7,6 +7,8 @@
 #include <QMouseEvent>
 #include <SDL_render.h>
 
+#include "Graphic/GraphicRect.h"
+
 
 void GraphicWidget::keyPressEvent(QKeyEvent* event)
 {
@@ -51,6 +53,20 @@ void GraphicWidget::Init()
 
 	m_projectTransfrom.translate(w / 2, h / 2);
 	m_projectTransfrom.scale(1, -1);
+
+	auto rect1 = new GraphicRect();
+	rect1->setX(-1);
+	rect1->setY(-0.05);
+	rect1->setWidth(2);
+	rect1->setHeight(0.1);
+	GraphicItemManager::instance()->addItem(rect1);
+
+	auto rect2 = new GraphicRect();
+	rect2->setX(-0.05);
+	rect2->setY(-1);
+	rect2->setWidth(0.1);
+	rect2->setHeight(2);
+	GraphicItemManager::instance()->addItem(rect2);
 }
 
 void GraphicWidget::Update() {

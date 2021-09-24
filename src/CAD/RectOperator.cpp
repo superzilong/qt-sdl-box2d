@@ -5,6 +5,8 @@
 
 #include <QMouseEvent>
 
+#include "CoordConverter.h"
+
 void RectOperator::keyPressEvent(QKeyEvent* event)
 {
 	if (event->key() == Qt::Key_Escape)
@@ -31,9 +33,10 @@ void RectOperator::mousePressEvent(QMouseEvent* event)
 		delete m_previewRect;
 		m_previewRect = nullptr;
 
-		QPoint previewPoint = event->pos();
-		auto [startX, endX] = std::minmax(m_rectPoint1.x(), previewPoint.x());
-		auto [startY, endY] = std::minmax(m_rectPoint1.y(), previewPoint.y());
+		QPoint mousePoint = event->pos();
+		auto[x, y] = m_converter->viewportToWorld(mousePoint.x(), mousePoint.y());
+		auto [startX, endX] = std::minmax(m_rectPoint1.x(), x);
+		auto [startY, endY] = std::minmax(m_rectPoint1.y(), y);
 
 		auto rect = new GraphicRect();
 		rect->setX(startX);
@@ -45,7 +48,9 @@ void RectOperator::mousePressEvent(QMouseEvent* event)
 	}
 	else
 	{
-		m_rectPoint1 = event->pos();
+		auto[x, y] = m_converter->viewportToWorld(event->pos().x(), event->pos().y());
+		m_rectPoint1.setX(x);
+		m_rectPoint1.setY(y);
 		m_rectPoint1Created = true;
 	}
 }
@@ -54,9 +59,10 @@ void RectOperator::mouseMoveEvent(QMouseEvent* event)
 {
 	if (m_rectPoint1Created)
 	{
-		QPoint previewPoint = event->pos();
-		auto [startX, endX] = std::minmax(m_rectPoint1.x(), previewPoint.x());
-		auto [startY, endY] = std::minmax(m_rectPoint1.y(), previewPoint.y());
+		QPoint mousePoint = event->pos();
+		auto[x, y] = m_converter->viewportToWorld(mousePoint.x(), mousePoint.y());
+		auto [startX, endX] = std::minmax(m_rectPoint1.x(), x);
+		auto [startY, endY] = std::minmax(m_rectPoint1.y(), y);
 
 		if (!m_previewRect)
 		{

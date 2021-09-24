@@ -41,7 +41,7 @@ MainWindow::MainWindow(QWidget *parent)
 	{
 		if (bCheck)
 		{
-			std::shared_ptr<RectOperator> spRectOperator =  std::make_shared<RectOperator>();
+			std::shared_ptr<RectOperator> spRectOperator =  std::make_shared<RectOperator>(ui->centralwidget->getCoordConverter());
 			ui->centralwidget->slot_setCADTool(spRectOperator);
 			connect(spRectOperator.get(), &CADOperator::signal_exit, this, [this]() {ui->actioncreateRect->setChecked(false); });
 		}
