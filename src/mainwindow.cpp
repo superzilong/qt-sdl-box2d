@@ -30,6 +30,7 @@ MainWindow::MainWindow(QWidget *parent)
 		rect->setY(y);
 		rect->setWidth(1);
 		rect->setHeight(1);
+		rect->setColor(0xFF, 0xB3, 0x44);
 		++idx;
 		GraphicItemManager::instance()->addItem(rect);
 		render();

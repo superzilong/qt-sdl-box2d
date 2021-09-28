@@ -10,7 +10,8 @@ public:
 	enum class Type
 	{
 		none,
-		rect
+		rect,
+		circle
 	};
 
 	GraphicItem() = default;

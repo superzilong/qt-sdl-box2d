@@ -15,5 +15,8 @@ void GraphicRect::render(SDL_Renderer* renderer, const QTransform& transform)
 	spos.w = rect.width();
 	spos.y = rect.top();
 	spos.x = rect.left();
+	SDL_SetRenderDrawColor(renderer, r, g, b, 0xFF);
 	SDL_RenderFillRect(renderer, &spos);
+	SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
+	SDL_RenderDrawRect(renderer, &spos);
 }

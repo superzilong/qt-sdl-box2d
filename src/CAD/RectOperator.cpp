@@ -39,6 +39,7 @@ void RectOperator::mousePressEvent(QMouseEvent* event)
 		auto [startY, endY] = std::minmax(m_rectPoint1.y(), y);
 
 		auto rect = new GraphicRect();
+		rect->setColor(0xFF, 0xB3, 0x44);
 		rect->setX(startX);
 		rect->setY(startY);
 		rect->setWidth(endX - startX);
@@ -67,6 +68,7 @@ void RectOperator::mouseMoveEvent(QMouseEvent* event)
 		if (!m_previewRect)
 		{
 			m_previewRect = new GraphicRect();
+			m_previewRect->setColor(0xFF, 0xB3, 0x44);
 			m_previewRect->setX(startX);
 			m_previewRect->setY(startY);
 			m_previewRect->setWidth(endX - startX);

@@ -57,6 +57,10 @@ public:
 		this->height = height;
 	}
 
+	void setColor(uint8_t r, uint8_t g, uint8_t b) { this->r = r; this->g = g; this->b = b; }
+
+	std::tuple<uint8_t, uint8_t, uint8_t> getColor() { return std::make_tuple(r, g, b); }
+
 	void render(SDL_Renderer* renderer, const QTransform& transform) override;
 
 private:
@@ -64,5 +68,8 @@ private:
 	double y = 0;
 	double width = 0;
 	double height = 0;
+	uint8_t r = 0;
+	uint8_t g = 0;
+	uint8_t b = 0;
 
 };

@@ -5,8 +5,10 @@
 #include "CAD/CADOperator.h"
 
 #include <QMouseEvent>
+#include <SDL2_gfxPrimitives.h>
 #include <SDL_render.h>
 
+#include "Graphic/GraphicCircle.h"
 #include "Graphic/GraphicRect.h"
 
 
@@ -59,6 +61,7 @@ void GraphicWidget::Init()
 	rect1->setY(-0.05);
 	rect1->setWidth(2);
 	rect1->setHeight(0.1);
+	rect1->setColor(255, 0, 0);
 	GraphicItemManager::instance()->addItem(rect1);
 
 	auto rect2 = new GraphicRect();
@@ -66,17 +69,23 @@ void GraphicWidget::Init()
 	rect2->setY(-1);
 	rect2->setWidth(0.1);
 	rect2->setHeight(2);
+	rect2->setColor(0, 255, 0);
 	GraphicItemManager::instance()->addItem(rect2);
+
+	auto circle = new GraphicCircle();
+	circle->setCenter({0, 0});
+	circle->setRadius(0.5);
+	GraphicItemManager::instance()->addItem(circle);
 }
 
 void GraphicWidget::Update() {
-	SDL_SetRenderDrawColor(renderer, 0xFF, 0x0, 0x0, 0xFF);
 	auto mgr = GraphicItemManager::instance();
 	auto items = mgr->getItems();
 	for (GraphicItem* item : items)
 	{
 		item->render(renderer,  m_viewTransform * m_projectTransfrom);
 	}
+
 }
 
 void GraphicWidget::OnResize(int w, int h)
