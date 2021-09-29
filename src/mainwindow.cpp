@@ -3,7 +3,6 @@
 
 #include "Graphic/GraphicItemManager.h"
 #include "Graphic/GraphicRect.h"
-#include <QDebug>
 #include <QMouseEvent>
 
 #include "GraphicWidget.h"
@@ -47,44 +46,6 @@ MainWindow::MainWindow(QWidget *parent)
     {
 		ui->toolBar->addAction(p_cad_action);
     }
-
-	//connect(ui->actioncreateRect, &QAction::toggled, ui->centralwidget, [this](bool bCheck)
-	//{
-	//	if (bCheck)
-	//	{
-	//		auto currentCADTool = ui->centralwidget->getCurrentCADTool();
-	//		if (currentCADTool)
-	//		{
-	//			emit currentCADTool->signal_exit();
-	//		}
-	//		std::shared_ptr<RectOperator> spRectOperator =  std::make_shared<RectOperator>(ui->centralwidget->getCoordConverter());
-	//		ui->centralwidget->slot_setCADTool(spRectOperator);
-	//		connect(spRectOperator.get(), &CADOperator::signal_exit, this, [this]() {ui->actioncreateRect->setChecked(false); });
-	//	}
-	//	else
-	//	{
-	//		ui->centralwidget->slot_setCADTool(nullptr);
-	//	}
-	//});
-
-	//connect(ui->actionCreatCircle, &QAction::toggled, ui->centralwidget, [this](bool bCheck)
-	//{
-	//	if (bCheck)
-	//	{
-	//		auto currentCADTool = ui->centralwidget->getCurrentCADTool();
-	//		if (currentCADTool)
-	//		{
-	//			emit currentCADTool->signal_exit();
-	//		}
-	//		std::shared_ptr<CircleOperator> spCircleOperator = std::make_shared<CircleOperator>(ui->centralwidget->getCoordConverter());
-	//		ui->centralwidget->slot_setCADTool(spCircleOperator);
-	//		connect(spCircleOperator.get(), &CADOperator::signal_exit, this, [this]() {ui->actionCreatCircle->setChecked(false); });
-	//	}
-	//	else
-	//	{
-	//		ui->centralwidget->slot_setCADTool(nullptr);
-	//	}
-	//});
 }
 
 MainWindow::~MainWindow()

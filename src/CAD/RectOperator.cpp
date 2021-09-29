@@ -21,6 +21,7 @@ void RectOperator::keyPressEvent(QKeyEvent* event)
 			m_rectPoint1Created = false;
 			GraphicItemManager::instance()->deleteItem(m_previewRect);
 			delete m_previewRect;
+			m_rectPoint1 = QPointF();
 			m_previewRect = nullptr;
 		}
 		else

@@ -22,6 +22,7 @@ void CircleOperator::keyPressEvent(QKeyEvent* event)
 			GraphicItemManager::instance()->deleteItem(m_previewCircle);
 			delete m_previewCircle;
 			m_previewCircle = nullptr;
+			m_centerPoint1 = QPointF();
 		}
 		else
 		{

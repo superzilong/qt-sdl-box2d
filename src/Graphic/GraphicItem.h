@@ -11,7 +11,9 @@ public:
 	{
 		none,
 		rect,
-		circle
+		circle,
+		line,
+		triangle
 	};
 
 	GraphicItem() = default;

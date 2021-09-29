@@ -2,7 +2,8 @@
 #include <qpoint.h>
 #include "CADOperator.h"
 
-class GraphicRect;
+class GraphicLine;
+class GraphicTriangle;
 
 class TriangleOperator : public CADOperator
 {
@@ -20,7 +21,10 @@ public:
 	void reset() override;
 private:
 
-	QPointF m_rectPoint1;
-	bool m_rectPoint1Created = false;
-	GraphicRect* m_previewRect = nullptr;
+	QPointF m_point1;
+	QPointF m_point2;
+	bool m_point1Created = false;
+	bool m_point2Created = false;
+	GraphicLine* m_previewLine = nullptr;
+	GraphicTriangle* m_previewTri = nullptr;
 };
