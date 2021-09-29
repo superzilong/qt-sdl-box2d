@@ -37,6 +37,7 @@
    </attribute>
    <addaction name="actionRender"/>
    <addaction name="actioncreateRect"/>
+   <addaction name="actionCreatCircle"/>
   </widget>
   <action name="actionRender">
    <property name="text">
@@ -52,6 +53,14 @@
    </property>
    <property name="text">
     <string>createRect</string>
+   </property>
+  </action>
+  <action name="actionCreatCircle">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>creatCircle</string>
    </property>
   </action>
  </widget>

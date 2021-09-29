@@ -56,26 +56,27 @@ void GraphicWidget::Init()
 	m_projectTransfrom.translate(w / 2, h / 2);
 	m_projectTransfrom.scale(1, -1);
 
-	auto rect1 = new GraphicRect();
-	rect1->setX(-1);
-	rect1->setY(-0.05);
-	rect1->setWidth(2);
-	rect1->setHeight(0.1);
-	rect1->setColor(255, 0, 0);
-	GraphicItemManager::instance()->addItem(rect1);
+	auto axis_x = new GraphicRect();
+	axis_x->setX(-1);
+	axis_x->setY(-0.06);
+	axis_x->setWidth(2.02);
+	axis_x->setHeight(0.14);
+	axis_x->setColor(255, 0, 0);
+	GraphicItemManager::instance()->addItem(axis_x);
 
-	auto rect2 = new GraphicRect();
-	rect2->setX(-0.05);
-	rect2->setY(-1);
-	rect2->setWidth(0.1);
-	rect2->setHeight(2);
-	rect2->setColor(0, 255, 0);
-	GraphicItemManager::instance()->addItem(rect2);
+	auto axis_y = new GraphicRect();
+	axis_y->setX(-0.06);
+	axis_y->setY(-1);
+	axis_y->setWidth(0.14);
+	axis_y->setHeight(2.02);
+	axis_y->setColor(0, 255, 0);
+	GraphicItemManager::instance()->addItem(axis_y);
 
-	auto circle = new GraphicCircle();
-	circle->setCenter({0, 0});
-	circle->setRadius(0.5);
-	GraphicItemManager::instance()->addItem(circle);
+	auto center = new GraphicCircle();
+	center->setCenter({0.0, 0.0});
+	center->setRadius(0.15);
+	center->setColor(0, 0, 0);
+	GraphicItemManager::instance()->addItem(center);
 }
 
 void GraphicWidget::Update() {
@@ -85,6 +86,16 @@ void GraphicWidget::Update() {
 	{
 		item->render(renderer,  m_viewTransform * m_projectTransfrom);
 	}
+	//SDL_Rect r1 = { 270, 195, 101, 11 };
+	//SDL_Rect r2 = { 315, 150, 11, 101 };
+	//
+	//SDL_SetRenderDrawColor(renderer, 255, 0, 0, 0xFF);
+	//SDL_RenderFillRect(renderer, &r1);
+
+	//SDL_SetRenderDrawColor(renderer, 0, 255, 0, 0xFF);
+	//SDL_RenderFillRect(renderer, &r2);
+
+	//filledCircleRGBA(renderer, 320, 200, 5, 0, 0, 0, 255);
 
 }
 

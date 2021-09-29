@@ -1,4 +1,4 @@
-#include "RectOperator.h"
+#include "TriangleOperator.h"
 
 #include "../Graphic/GraphicItemManager.h"
 #include "../Graphic/GraphicRect.h"
@@ -7,7 +7,7 @@
 
 #include "CoordConverter.h"
 
-void RectOperator::keyPressEvent(QKeyEvent* event)
+void TriangleOperator::keyPressEvent(QKeyEvent* event)
 {
 	if (event->key() == Qt::Key_Escape)
 	{
@@ -25,7 +25,7 @@ void RectOperator::keyPressEvent(QKeyEvent* event)
 	}
 }
 
-void RectOperator::mousePressEvent(QMouseEvent* event)
+void TriangleOperator::mousePressEvent(QMouseEvent* event)
 {
 	if (m_rectPoint1Created)
 	{
@@ -56,7 +56,7 @@ void RectOperator::mousePressEvent(QMouseEvent* event)
 	}
 }
 
-void RectOperator::mouseMoveEvent(QMouseEvent* event)
+void TriangleOperator::mouseMoveEvent(QMouseEvent* event)
 {
 	if (m_rectPoint1Created)
 	{
@@ -85,6 +85,6 @@ void RectOperator::mouseMoveEvent(QMouseEvent* event)
 	}
 }
 
-void RectOperator::mouseReleaseEvent(QMouseEvent* event)
+void TriangleOperator::mouseReleaseEvent(QMouseEvent* event)
 {
 }

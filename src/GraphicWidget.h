@@ -21,7 +21,9 @@ public:
 		setMouseTracking(true);
 	}
 
-	CoordConverter* getCoordConverter() { return &m_converter; };
+	CoordConverter* getCoordConverter() { return &m_converter; }
+	std::shared_ptr<CADOperator> getCurrentCADTool() { return m_CADOperator; }
+
 protected:
 	void keyPressEvent(QKeyEvent* event) override;
 	void mousePressEvent(QMouseEvent* event) override;

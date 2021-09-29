@@ -63,5 +63,6 @@ void GraphicCircle::render(SDL_Renderer* renderer, const QTransform& transform)
 	//		error += (tx - diameter);
 	//	}
 	//}
-	circleRGBA(renderer, int16_t(vCenter.x()), int16_t(vCenter.y()), int16_t(vRadius), 255, 0, 0, 255);
+	filledCircleRGBA(renderer, int16_t(vCenter.x()), int16_t(vCenter.y()), int16_t(vRadius), r, g, b, 255);
+	circleRGBA(renderer, int16_t(vCenter.x()), int16_t(vCenter.y()), int16_t(vRadius), 0, 0, 0, 255);
 } 

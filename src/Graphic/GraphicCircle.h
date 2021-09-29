@@ -28,6 +28,12 @@ public:
 		this->center = center;
 	}
 
+	void setCenter(double x, double y)
+	{
+		this->center.setX(x);
+		this->center.setY(y);
+	}
+
 	double getRadius() const
 	{
 		return radius;
@@ -36,6 +42,11 @@ public:
 	void setRadius(double radius)
 	{
 		this->radius = radius;
+	}
+
+	void setPointInCircle(double x, double y)
+	{
+		this->radius = sqrt(std::pow(x - center.x(), 2) + std::pow(y - center.y(), 2));
 	}
 
 	void setColor(uint8_t r, uint8_t g, uint8_t b) { this->r = r; this->g = g; this->b = b; }

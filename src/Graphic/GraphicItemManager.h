@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include <vector>
 
-class GraphicItem;
+#include "GraphicItem.h"
 
 class GraphicItemManager
 {
@@ -13,7 +13,8 @@ public:
 	}
 
 	void addItem(GraphicItem* item);
-	void deleteItem(uint32_t id);
+	void deleteItem(GraphicItem::Type type, uint32_t id);
+	void deleteItem(GraphicItem* inputItem);
 	std::vector<GraphicItem*> getItems();
 
 protected:

@@ -5,6 +5,7 @@
 
 #include <QMainWindow>
 
+#include "CAD/CircleOperator.h"
 #include "CAD/RectOperator.h"
 
 QT_BEGIN_NAMESPACE
@@ -28,6 +29,7 @@ private:
 	int idx = 0;
 
 	std::shared_ptr<RectOperator> m_pRectOperator;
+	std::shared_ptr<CircleOperator> m_pCircleOperator;
 
 private slots:
 	void slot_printMousePos(const QPoint& pos);
