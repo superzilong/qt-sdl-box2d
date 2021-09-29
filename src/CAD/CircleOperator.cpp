@@ -7,6 +7,11 @@
 
 #include "CoordConverter.h"
 
+CircleOperator::CircleOperator()
+{
+	m_action.setText("create circle");
+}
+
 void CircleOperator::keyPressEvent(QKeyEvent* event)
 {
 	if (event->key() == Qt::Key_Escape)
@@ -20,7 +25,7 @@ void CircleOperator::keyPressEvent(QKeyEvent* event)
 		}
 		else
 		{
-			emit signal_exit();
+			emit signal_exit(this);
 	 	}
 	}
 }
@@ -76,4 +81,16 @@ void CircleOperator::mouseMoveEvent(QMouseEvent* event)
 
 void CircleOperator::mouseReleaseEvent(QMouseEvent* event)
 {
+}
+
+void CircleOperator::reset()
+{
+	if (m_previewCircle)
+	{
+		GraphicItemManager::instance()->deleteItem(m_previewCircle);
+		delete m_previewCircle;
+		m_previewCircle = nullptr;
+	}
+	m_centerPoint1 = QPointF();
+	m_centerPoint1Created = false;
 }

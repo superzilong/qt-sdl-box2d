@@ -7,6 +7,11 @@
 
 #include "CoordConverter.h"
 
+TriangleOperator::TriangleOperator()
+{
+	m_action.setText("create triangle");
+}
+
 void TriangleOperator::keyPressEvent(QKeyEvent* event)
 {
 	if (event->key() == Qt::Key_Escape)
@@ -20,7 +25,7 @@ void TriangleOperator::keyPressEvent(QKeyEvent* event)
 		}
 		else
 		{
-			emit signal_exit();
+			emit signal_exit(this);
 	 	}
 	}
 }
@@ -86,5 +91,9 @@ void TriangleOperator::mouseMoveEvent(QMouseEvent* event)
 }
 
 void TriangleOperator::mouseReleaseEvent(QMouseEvent* event)
+{
+}
+
+void TriangleOperator::reset()
 {
 }

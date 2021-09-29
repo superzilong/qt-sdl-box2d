@@ -7,6 +7,11 @@
 
 #include "CoordConverter.h"
 
+RectOperator::RectOperator()
+{
+	m_action.setText("create rectangle");
+}
+
 void RectOperator::keyPressEvent(QKeyEvent* event)
 {
 	if (event->key() == Qt::Key_Escape)
@@ -20,7 +25,7 @@ void RectOperator::keyPressEvent(QKeyEvent* event)
 		}
 		else
 		{
-			emit signal_exit();
+			emit signal_exit(this);
 	 	}
 	}
 }
@@ -87,4 +92,16 @@ void RectOperator::mouseMoveEvent(QMouseEvent* event)
 
 void RectOperator::mouseReleaseEvent(QMouseEvent* event)
 {
+}
+
+void RectOperator::reset()
+{
+	if (m_previewRect)
+	{
+		GraphicItemManager::instance()->deleteItem(m_previewRect);
+		delete m_previewRect;
+		m_previewRect = nullptr;
+	}
+	m_rectPoint1 = QPointF();
+	m_rectPoint1Created = false;
 }

@@ -6,42 +6,50 @@
 
 #include <QMouseEvent>
 #include <SDL2_gfxPrimitives.h>
-#include <SDL_render.h>
 
+#include "CAD/CADOperatorMgr.h"
 #include "Graphic/GraphicCircle.h"
 #include "Graphic/GraphicRect.h"
 
 
 void GraphicWidget::keyPressEvent(QKeyEvent* event)
 {
-	if (m_CADOperator)
+	auto mgr = CADOperatorMgr::instance();
+	auto pOp = mgr->getCurrentOp();
+	if (pOp)
 	{
-		m_CADOperator->keyPressEvent(event);
+		pOp->keyPressEvent(event);
 	}
 }
 
 void GraphicWidget::mousePressEvent(QMouseEvent* event)
 {
-	if (m_CADOperator)
+	auto mgr = CADOperatorMgr::instance();
+	auto pOp = mgr->getCurrentOp();
+	if (pOp)
 	{
-		m_CADOperator->mousePressEvent(event);
+		pOp->mousePressEvent(event);
 	}
 }
 
 void GraphicWidget::mouseMoveEvent(QMouseEvent* event)
 {
-	if (m_CADOperator)
+	auto mgr = CADOperatorMgr::instance();
+	auto pOp = mgr->getCurrentOp();
+	if (pOp)
 	{
-		m_CADOperator->mouseMoveEvent(event);
+		pOp->mouseMoveEvent(event);
 	}
 	emit signal_mousePos(event->pos());
 }
 
 void GraphicWidget::mouseReleaseEvent(QMouseEvent* event)
 {
-	if (m_CADOperator)
+	auto mgr = CADOperatorMgr::instance();
+	auto pOp = mgr->getCurrentOp();
+	if (pOp)
 	{
-		m_CADOperator->mouseReleaseEvent(event);
+		pOp->mouseReleaseEvent(event);
 	}
 }
 
