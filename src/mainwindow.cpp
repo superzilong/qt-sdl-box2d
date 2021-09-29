@@ -18,8 +18,8 @@ MainWindow::MainWindow(QWidget *parent)
 	centralWidget()->setMouseTracking(true);
 	
 	setWindowTitle("QMainWindow SDL Rendering GraphicWidget");
-	setBaseSize(640, 480);
-	resize(640, 480);
+	//setBaseSize(1200, 900);
+	resize(1200, 900);
 
 	connect(ui->actionRender, &QAction::triggered, this, [this]()
 	{
