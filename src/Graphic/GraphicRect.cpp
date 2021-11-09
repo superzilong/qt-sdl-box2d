@@ -8,7 +8,7 @@ uint32_t GraphicRect::s_id = 0;
 
 void GraphicRect::render(SDL_Renderer* renderer, const QTransform& transform)
 {
-	QRectF qrect(m_left, m_top, m_width, m_height);
+	QRectF qrect(m_left, m_bottom, m_width, m_height);
 	QRectF rect = transform.mapRect(qrect);
 	SDL_Rect spos;
 	spos.h = rect.height();

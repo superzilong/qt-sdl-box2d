@@ -6,6 +6,7 @@
 #include <QMouseEvent>
 
 #include "CoordConverter.h"
+#include "Core/Log.h"
 #include "PhysicalEngine/PhysicalEngine.h"
 
 RectOperator::RectOperator()
@@ -49,11 +50,17 @@ void RectOperator::mousePressEvent(QMouseEvent* event)
 		auto rect = new GraphicRect();
 		rect->setColor(0xFF, 0xB3, 0x44);
 		rect->setLeft(startX);
-		rect->setTop(startY);
+		rect->setBottom(startY);
 		rect->setWidth(endX - startX);
 		rect->setHeight(endY - startY);
 		GraphicItemManager::instance()->addItem(rect);
 		m_rectPoint1Created = false;
+		LOG_INFO(fmt::format("Create rect with center: ({0}, {1}), width: {2}, height: {3}",
+			rect->getCenter().x(),
+			rect->getCenter().y(),
+			rect->getWidth(),
+			rect->getHeight()
+		));
 
 		// Create rectangle physical model.
 		auto pe = PhysicalEngine::instance();
@@ -83,7 +90,7 @@ void RectOperator::mouseMoveEvent(QMouseEvent* event)
 			m_previewRect = new GraphicRect();
 			m_previewRect->setColor(0xFF, 0xB3, 0x44);
 			m_previewRect->setLeft(startX);
-			m_previewRect->setTop(startY);
+			m_previewRect->setBottom(startY);
 			m_previewRect->setWidth(endX - startX);
 			m_previewRect->setHeight(endY - startY);
 			GraphicItemManager::instance()->addItem(m_previewRect);
@@ -91,7 +98,7 @@ void RectOperator::mouseMoveEvent(QMouseEvent* event)
 		else
 		{
 			m_previewRect->setLeft(startX);
-			m_previewRect->setTop(startY);
+			m_previewRect->setBottom(startY);
 			m_previewRect->setWidth(endX - startX);
 			m_previewRect->setHeight(endY - startY);
 		}

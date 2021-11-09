@@ -67,7 +67,7 @@ void GraphicWidget::Init()
 
 	auto axis_x = new GraphicRect();
 	axis_x->setLeft(-1);
-	axis_x->setTop(-0.06);
+	axis_x->setBottom(-0.06);
 	axis_x->setWidth(2.02);
 	axis_x->setHeight(0.14);
 	axis_x->setColor(255, 0, 0);
@@ -75,7 +75,7 @@ void GraphicWidget::Init()
 
 	auto axis_y = new GraphicRect();
 	axis_y->setLeft(-0.06);
-	axis_y->setTop(-1);
+	axis_y->setBottom(-1);
 	axis_y->setWidth(0.14);
 	axis_y->setHeight(2.02);
 	axis_y->setColor(0, 255, 0);
@@ -86,6 +86,15 @@ void GraphicWidget::Init()
 	center->setRadius(0.15);
 	center->setColor(0, 0, 0);
 	GraphicItemManager::instance()->addItem(center);
+
+	auto groundBox = new GraphicRect();
+	groundBox->setLeft(-50.);
+	groundBox->setBottom(-20.);
+	groundBox->setWidth(100);
+	groundBox->setHeight(20);
+	GraphicItemManager::instance()->addItem(groundBox);
+
+	PhysicalEngine::instance()->createGroundBox(groundBox);
 }
 
 void GraphicWidget::Update() {

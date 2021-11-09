@@ -22,6 +22,7 @@ public:
 	void start() { m_isRunning = true; }
 	void stop() { m_isRunning = false; }
 	bool isRunning() { return m_isRunning; }
+	void setIsRunning(bool isRunning) { m_isRunning = isRunning; }
 
 protected:
 	PhysicalEngine();

@@ -7,6 +7,7 @@
 
 #include "GraphicWidget.h"
 #include "CAD/CADOperatorMgr.h"
+#include "PhysicalEngine/PhysicalEngine.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -27,7 +28,7 @@ MainWindow::MainWindow(QWidget *parent)
 		int x = 1 * idx;
 		int y = 1 * idx;
 		rect->setLeft(x);
-		rect->setTop(y);
+		rect->setBottom(y);
 		rect->setWidth(1);
 		rect->setHeight(1);
 		rect->setColor(0xFF, 0xB3, 0x44);
@@ -46,6 +47,11 @@ MainWindow::MainWindow(QWidget *parent)
     {
 		ui->toolBar->addAction(p_cad_action);
     }
+
+	QAction* play = new QAction("play", this);
+	play->setCheckable(true);
+	ui->toolBar->addAction(play);
+	connect(play, &QAction::toggled, this, [](bool tog) {PhysicalEngine::instance()->setIsRunning(tog); });
 }
 
 MainWindow::~MainWindow()

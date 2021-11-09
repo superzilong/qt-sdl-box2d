@@ -29,14 +29,14 @@ public:
 		m_left = left;
 	}
 
-	double getTop() const
+	double getBottom() const
 	{
-		return m_top;
+		return m_bottom;
 	}
 
-	void setTop(double top)
+	void setBottom(double btm)
 	{
-		this->m_top = top;
+		this->m_bottom = btm;
 	}
 
 	double getWidth() const
@@ -61,8 +61,8 @@ public:
 
 	QPointF getCenter() const
 	{
-		QRectF qrect(m_left, m_top, m_width, m_height);
-		return qrect.center();
+		//QRectF qrect(m_left, m_bottom + m_height, m_width, m_height);
+		return QPointF((m_left + m_left + m_width) / 2, (m_bottom + m_bottom + m_height) / 2);
 	}
 
 	
@@ -75,7 +75,7 @@ public:
 
 private:
 	double m_left = 0;
-	double m_top = 0;
+	double m_bottom = 0;
 	double m_width = 0;
 	double m_height = 0;
 	uint8_t m_r = 0;

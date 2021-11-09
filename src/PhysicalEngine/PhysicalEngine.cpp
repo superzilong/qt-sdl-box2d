@@ -2,6 +2,7 @@
 
 #include <qpoint.h>
 
+#include "Core/Log.h"
 #include "Graphic/GraphicRect.h"
 
 PhysicalEngine::PhysicalEngine()
@@ -41,7 +42,7 @@ b2Body* PhysicalEngine::createDynamicBox(GraphicRect* box, float density, float 
 	float centerX = static_cast<float>(center.x());
 	float centerY = static_cast<float>(center.y());
 	float width = static_cast<float>(box->getWidth());
-	float height = static_cast<float>(box->getWidth());
+	float height = static_cast<float>(box->getHeight());
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
 	//bodyDef.position.Set(0.0f, 4.0f);
@@ -72,9 +73,12 @@ void PhysicalEngine::step(float timeStep, int velocityIterations, int positionIt
 		for (auto&& item : m_dynamicBodies2Graphic)
 		{
 			b2Transform b2Trans = item.first->GetTransform();
-			QTransform qTrans;
-			qTrans.rotate(b2Trans.q.GetAngle());
-			item.second;
+			//QTransform qTrans;
+			//qTrans.rotate(b2Trans.q.GetAngle());
+			//item.second;
+			LOG_INFO(fmt::format("Motion x: {}", b2Trans.p.x));
+			LOG_INFO(fmt::format("Motion y: {}", b2Trans.p.y));
+			LOG_INFO(fmt::format("Rotation: {}", b2Trans.q.GetAngle()));
 		}
 	}
 }
