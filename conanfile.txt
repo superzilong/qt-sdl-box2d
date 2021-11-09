@@ -4,8 +4,9 @@ box2d/2.4.1
 spdlog/1.9.2
 
 [generators]
-cmake_find_package
-cmake_paths
+cmake_find_package_multi
+#cmake_find_package
+#cmake_paths
 
 [options]
 fmt:header_only=True

@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 
+set(CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR})
+set(CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR})
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(CMAKE_AUTOUIC ON)
@@ -12,11 +14,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 
-include(${CMAKE_BINARY_DIR}/conan_paths.cmake)
+# include(${CMAKE_BINARY_DIR}/conan_paths.cmake)
 
-find_package(SDL2 REQUIRED)
-find_package(box2d REQUIRED)
-find_package(spdlog REQUIRED)
+find_package(SDL2 REQUIRED CONFIG)
+find_package(box2d REQUIRED CONFIG)
+find_package(spdlog REQUIRED CONFIG)
 
 FILE(GLOB_RECURSE headers "${CMAKE_CURRENT_SOURCE_DIR}/*.h")
 FILE(GLOB_RECURSE sources "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")

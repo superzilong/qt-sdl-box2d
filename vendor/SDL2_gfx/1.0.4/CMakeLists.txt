@@ -2,9 +2,10 @@ cmake_minimum_required(VERSION 3.5)
 
 project (SDL2_gfx)
 
-include(${CMAKE_BINARY_DIR}/conan_paths.cmake)
+set(CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR})
+set(CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR})
 
-find_package(SDL2 REQUIRED)
+find_package(SDL2 REQUIRED CONFIG)
 
 FILE(GLOB_RECURSE sources "${CMAKE_CURRENT_SOURCE_DIR}/*.c")
 FILE(GLOB_RECURSE headers "${CMAKE_CURRENT_SOURCE_DIR}/*.h")
