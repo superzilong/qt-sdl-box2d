@@ -1,7 +1,13 @@
 [requires]
 sdl/2.0.16
 box2d/2.4.1
+spdlog/1.9.2
 
 [generators]
 cmake_find_package
 cmake_paths
+
+[options]
+fmt:header_only=True
+fmt:with_fmt_alias=True
+spdlog:header_only=True
