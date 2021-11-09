@@ -10,6 +10,7 @@
 #include "CAD/CADOperatorMgr.h"
 #include "Graphic/GraphicCircle.h"
 #include "Graphic/GraphicRect.h"
+#include "PhysicalEngine/PhysicalEngine.h"
 
 
 void GraphicWidget::keyPressEvent(QKeyEvent* event)
@@ -65,16 +66,16 @@ void GraphicWidget::Init()
 	m_projectTransfrom.scale(1, -1);
 
 	auto axis_x = new GraphicRect();
-	axis_x->setX(-1);
-	axis_x->setY(-0.06);
+	axis_x->setLeft(-1);
+	axis_x->setTop(-0.06);
 	axis_x->setWidth(2.02);
 	axis_x->setHeight(0.14);
 	axis_x->setColor(255, 0, 0);
 	GraphicItemManager::instance()->addItem(axis_x);
 
 	auto axis_y = new GraphicRect();
-	axis_y->setX(-0.06);
-	axis_y->setY(-1);
+	axis_y->setLeft(-0.06);
+	axis_y->setTop(-1);
 	axis_y->setWidth(0.14);
 	axis_y->setHeight(2.02);
 	axis_y->setColor(0, 255, 0);
@@ -88,6 +89,13 @@ void GraphicWidget::Init()
 }
 
 void GraphicWidget::Update() {
+	PhysicalEngine* physicalEngine = PhysicalEngine::instance();
+	if (physicalEngine->isRunning())
+	{
+		physicalEngine->step();// Use default 60 FPS.
+	}
+	
+	
 	auto mgr = GraphicItemManager::instance();
 	auto items = mgr->getItems();
 	for (GraphicItem* item : items)

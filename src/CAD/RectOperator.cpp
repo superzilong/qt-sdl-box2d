@@ -6,6 +6,7 @@
 #include <QMouseEvent>
 
 #include "CoordConverter.h"
+#include "PhysicalEngine/PhysicalEngine.h"
 
 RectOperator::RectOperator()
 {
@@ -44,14 +45,20 @@ void RectOperator::mousePressEvent(QMouseEvent* event)
 		auto [startX, endX] = std::minmax(m_rectPoint1.x(), x);
 		auto [startY, endY] = std::minmax(m_rectPoint1.y(), y);
 
+		// Create rectangle graphic.
 		auto rect = new GraphicRect();
 		rect->setColor(0xFF, 0xB3, 0x44);
-		rect->setX(startX);
-		rect->setY(startY);
+		rect->setLeft(startX);
+		rect->setTop(startY);
 		rect->setWidth(endX - startX);
 		rect->setHeight(endY - startY);
 		GraphicItemManager::instance()->addItem(rect);
 		m_rectPoint1Created = false;
+
+		// Create rectangle physical model.
+		auto pe = PhysicalEngine::instance();
+		b2Body* body = pe->createDynamicBox(rect);
+
 	}
 	else
 	{
@@ -75,16 +82,16 @@ void RectOperator::mouseMoveEvent(QMouseEvent* event)
 		{
 			m_previewRect = new GraphicRect();
 			m_previewRect->setColor(0xFF, 0xB3, 0x44);
-			m_previewRect->setX(startX);
-			m_previewRect->setY(startY);
+			m_previewRect->setLeft(startX);
+			m_previewRect->setTop(startY);
 			m_previewRect->setWidth(endX - startX);
 			m_previewRect->setHeight(endY - startY);
 			GraphicItemManager::instance()->addItem(m_previewRect);
 		}
 		else
 		{
-			m_previewRect->setX(startX);
-			m_previewRect->setY(startY);
+			m_previewRect->setLeft(startX);
+			m_previewRect->setTop(startY);
 			m_previewRect->setWidth(endX - startX);
 			m_previewRect->setHeight(endY - startY);
 		}

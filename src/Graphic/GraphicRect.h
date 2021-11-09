@@ -1,7 +1,9 @@
 ﻿#pragma once
+#include <qpoint.h>
 #include <qstring.h>
 
 #include "GraphicItem.h"
+#include "CAD/RectOperator.h"
 
 class GraphicRect : public GraphicItem
 {
@@ -17,59 +19,67 @@ public:
 
 	virtual ~GraphicRect() {}
 
-	double getX() const
+	double getLeft() const
 	{
-		return x;
+		return m_left;
 	}
 
-	void setX(double x)
+	void setLeft(double left)
 	{
-		this->x = x;
+		m_left = left;
 	}
 
-	double getY() const
+	double getTop() const
 	{
-		return y;
+		return m_top;
 	}
 
-	void setY(double y)
+	void setTop(double top)
 	{
-		this->y = y;
+		this->m_top = top;
 	}
 
 	double getWidth() const
 	{
-		return width;
+		return m_width;
 	}
 
 	void setWidth(double width)
 	{
-		this->width = width;
+		this->m_width = width;
 	}
 
 	double getHeight() const
 	{
-		return height;
+		return m_height;
 	}
 
 	void setHeight(double height)
 	{
-		this->height = height;
+		this->m_height = height;
 	}
 
-	void setColor(uint8_t r, uint8_t g, uint8_t b) { this->r = r; this->g = g; this->b = b; }
+	QPointF getCenter() const
+	{
+		QRectF qrect(m_left, m_top, m_width, m_height);
+		return qrect.center();
+	}
 
-	std::tuple<uint8_t, uint8_t, uint8_t> getColor() { return std::make_tuple(r, g, b); }
+	
+
+	void setColor(uint8_t r, uint8_t g, uint8_t b) { this->m_r = r; this->m_g = g; this->m_b = b; }
+
+	std::tuple<uint8_t, uint8_t, uint8_t> getColor() { return std::make_tuple(m_r, m_g, m_b); }
 
 	void render(SDL_Renderer* renderer, const QTransform& transform) override;
 
 private:
-	double x = 0;
-	double y = 0;
-	double width = 0;
-	double height = 0;
-	uint8_t r = 0;
-	uint8_t g = 0;
-	uint8_t b = 0;
+	double m_left = 0;
+	double m_top = 0;
+	double m_width = 0;
+	double m_height = 0;
+	uint8_t m_r = 0;
+	uint8_t m_g = 0;
+	uint8_t m_b = 0;
 
 };

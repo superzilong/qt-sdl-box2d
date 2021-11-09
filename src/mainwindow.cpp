@@ -26,8 +26,8 @@ MainWindow::MainWindow(QWidget *parent)
 		auto rect = new GraphicRect();
 		int x = 1 * idx;
 		int y = 1 * idx;
-		rect->setX(x);
-		rect->setY(y);
+		rect->setLeft(x);
+		rect->setTop(y);
 		rect->setWidth(1);
 		rect->setHeight(1);
 		rect->setColor(0xFF, 0xB3, 0x44);

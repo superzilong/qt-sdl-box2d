@@ -1,7 +1,7 @@
 ﻿#pragma once
+#include <QTransform>
 #include <string>
 
-class QTransform;
 struct SDL_Renderer;
 
 class GraphicItem
@@ -50,10 +50,21 @@ public:
 		this->type = type;
 	}
 
+	QTransform getTrans() const
+	{
+		return m_trans;
+	}
+
+	void setTrans(const QTransform& trans)
+	{
+		m_trans = trans;
+	}
+
 	virtual void render(SDL_Renderer* renderer, const QTransform& transform) = 0;
 
 protected:
 	uint32_t id;
 	std::string name;
 	Type type = Type::none;
+	QTransform m_trans;
 };

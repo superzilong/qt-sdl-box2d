@@ -1,10 +1,84 @@
 #include "PhysicalEngine.h"
 
+#include <qpoint.h>
+
+#include "Graphic/GraphicRect.h"
+
 PhysicalEngine::PhysicalEngine()
 {
 	b2Vec2 gravity(0.f, -10.f);
 	m_world = new b2World(gravity);
 }
+
+b2Body* PhysicalEngine::createGroundBox(GraphicRect* box)
+{
+	QPointF center = box->getCenter();
+	float centerX = static_cast<float>(center.x());
+	float centerY = static_cast<float>(center.y());
+	float width = static_cast<float>(box->getWidth());
+	float height = static_cast<float>(box->getHeight());
+	
+    b2BodyDef groundBodyDef;
+    //groundBodyDef.position.Set(0.f, -10.f);
+    groundBodyDef.position.Set(centerX, centerY);
+
+    b2Body* groundBody = m_world->CreateBody(&groundBodyDef);
+
+    b2PolygonShape groundBox;
+    //groundBox.SetAsBox(50.f, 10.f);
+	groundBox.SetAsBox(width / 2.f, height / 2.f);
+
+    groundBody->CreateFixture(&groundBox, 0.f);
+
+	m_staticBodies.push_back(groundBody);
+
+	return groundBody;
+}
+
+b2Body* PhysicalEngine::createDynamicBox(GraphicRect* box, float density, float friction)
+{
+	QPointF center = box->getCenter();
+	float centerX = static_cast<float>(center.x());
+	float centerY = static_cast<float>(center.y());
+	float width = static_cast<float>(box->getWidth());
+	float height = static_cast<float>(box->getWidth());
+	b2BodyDef bodyDef;
+	bodyDef.type = b2_dynamicBody;
+	//bodyDef.position.Set(0.0f, 4.0f);
+	bodyDef.position.Set(centerX, centerY);
+	b2Body* body = m_world->CreateBody(&bodyDef);
+
+	b2PolygonShape dynamicBox;
+	dynamicBox.SetAsBox(width/2.f, height/2.f);
+
+	b2FixtureDef fixtureDef;
+	fixtureDef.shape = &dynamicBox;
+	fixtureDef.density = density;
+	fixtureDef.friction = friction;
+
+	body->CreateFixture(&fixtureDef);
+	body->GetTransform();
+
+	m_dynamicBodies2Graphic.emplace(body, box);
+
+	return body;
+}
+
+void PhysicalEngine::step(float timeStep, int velocityIterations, int positionIterations)
+{
+	if (m_isRunning)
+	{
+		m_world->Step(timeStep, velocityIterations, positionIterations);
+		for (auto&& item : m_dynamicBodies2Graphic)
+		{
+			b2Transform b2Trans = item.first->GetTransform();
+			QTransform qTrans;
+			qTrans.rotate(b2Trans.q.GetAngle());
+			item.second;
+		}
+	}
+}
+
 
 //#include <iostream>
 //#include <box2d/box2d.h>
