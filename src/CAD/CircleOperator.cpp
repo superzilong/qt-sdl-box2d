@@ -6,6 +6,7 @@
 #include <QMouseEvent>
 
 #include "CoordConverter.h"
+#include "PhysicalEngine/PhysicalEngine.h"
 
 CircleOperator::CircleOperator()
 {
@@ -48,6 +49,10 @@ void CircleOperator::mousePressEvent(QMouseEvent* event)
 		circle->setPointInCircle(x, y);
 		GraphicItemManager::instance()->addItem(circle);
 		m_centerPoint1Created = false;
+
+		// Create circle physical model.
+		auto pe = PhysicalEngine::instance();
+		b2Body* body = pe->createDynamicCircle(circle);
 	}
 	else
 	{

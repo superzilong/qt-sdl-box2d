@@ -8,6 +8,7 @@
 #include "CoordConverter.h"
 #include "Graphic/GraphicLine.h"
 #include "Graphic/GraphicTriangle.h"
+#include "PhysicalEngine/PhysicalEngine.h"
 
 TriangleOperator::TriangleOperator()
 {
@@ -68,6 +69,8 @@ void TriangleOperator::mousePressEvent(QMouseEvent* event)
 		tri->setPoints(m_point1.x(), m_point1.y(), m_point2.x(), m_point2.y(), x, y);
 		GraphicItemManager::instance()->addItem(tri);
 		reset();
+
+		PhysicalEngine::instance()->createDynamicTriangle(tri);
 	}
 	else if (m_point1Created)
 	{

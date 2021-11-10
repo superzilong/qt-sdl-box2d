@@ -3,7 +3,9 @@
 #include <qpoint.h>
 
 #include "Core/Log.h"
+#include "Graphic/GraphicCircle.h"
 #include "Graphic/GraphicRect.h"
+#include "Graphic/GraphicTriangle.h"
 
 PhysicalEngine::PhysicalEngine()
 {
@@ -58,9 +60,64 @@ b2Body* PhysicalEngine::createDynamicBox(GraphicRect* box, float density, float 
 	fixtureDef.friction = friction;
 
 	body->CreateFixture(&fixtureDef);
-	body->GetTransform();
-
 	m_dynamicBodies2Graphic.emplace(body, box);
+
+	return body;
+}
+
+b2Body* PhysicalEngine::createDynamicCircle(GraphicCircle* circle, float density, float friction)
+{
+	QPointF center = circle->getCenter();
+	float centerX = static_cast<float>(center.x());
+	float centerY = static_cast<float>(center.y());
+	b2BodyDef bodyDef;
+	bodyDef.type = b2_dynamicBody;
+	bodyDef.position.Set(centerX, centerY);
+	b2Body* body = m_world->CreateBody(&bodyDef);
+
+	b2CircleShape c;
+	c.m_radius = static_cast<float>(circle->getRadius());
+
+	b2FixtureDef fixtureDef;
+	fixtureDef.shape = &c;
+	fixtureDef.density = density;
+	fixtureDef.friction = friction;
+
+	body->CreateFixture(&fixtureDef);
+	m_dynamicBodies2Graphic.emplace(body, circle);
+
+	return body;
+}
+
+b2Body* PhysicalEngine::createDynamicTriangle(GraphicTriangle* tri, float density, float friction)
+{
+	QPointF center = tri->getCenter();
+	float centerX = static_cast<float>(center.x());
+	float centerY = static_cast<float>(center.y());
+
+	b2BodyDef bodyDef;
+	bodyDef.type = b2_dynamicBody;
+	//bodyDef.position.Set(0.0f, 4.0f);
+	bodyDef.position.Set(centerX, centerY);
+	b2Body* body = m_world->CreateBody(&bodyDef);
+
+	b2PolygonShape dynamicTri;
+	auto p1 = tri->getEndPoint1();
+	auto p2 = tri->getEndPoint2();
+	auto p3 = tri->getEndPoint3();
+	b2Vec2 points[3];
+	points[0].Set(static_cast<float>(p1.x() - centerX), static_cast<float>(p1.y() - centerY));
+	points[1].Set(static_cast<float>(p2.x() - centerX), static_cast<float>(p2.y() - centerY));
+	points[2].Set(static_cast<float>(p3.x() - centerX), static_cast<float>(p3.y() - centerY));
+	dynamicTri.Set(points, 3);
+
+	b2FixtureDef fixtureDef;
+	fixtureDef.shape = &dynamicTri;
+	fixtureDef.density = density;
+	fixtureDef.friction = friction;
+
+	body->CreateFixture(&fixtureDef);
+	m_dynamicBodies2Graphic.emplace(body, tri);
 
 	return body;
 }
@@ -87,6 +144,24 @@ void PhysicalEngine::step(float timeStep, int velocityIterations, int positionIt
 				QPointF center = rect->getCenter();
 				modelTransform.translate(- center.x(), - center.y());
 				rect->setModelTrans(modelTransform);
+			}
+			if (GraphicCircle* c = dynamic_cast<GraphicCircle*>(item.second))
+			{
+				QTransform modelTransform;
+				modelTransform.translate(b2Trans.p.x, b2Trans.p.y);
+				modelTransform.rotateRadians(b2Trans.q.GetAngle());
+				QPointF center = c->getCenter();
+				modelTransform.translate(-center.x(), -center.y());
+				c->setModelTrans(modelTransform);
+			}
+			if (GraphicTriangle* tri = dynamic_cast<GraphicTriangle*>(item.second))
+			{
+				QTransform modelTransform;
+				modelTransform.translate(b2Trans.p.x, b2Trans.p.y);
+				modelTransform.rotateRadians(b2Trans.q.GetAngle());
+				QPointF center = tri->getCenter();
+				modelTransform.translate(-center.x(), -center.y());
+				tri->setModelTrans(modelTransform);
 			}
 		}
 	}

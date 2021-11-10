@@ -18,6 +18,8 @@ public:
 
 	virtual ~GraphicTriangle() {}
 
+	QPointF getCenter() { return QPointF((p1.x() + p2.x() + p3.x()) / 3., (p1.y() + p2.y() + p3.y()) / 3.); }
+
 	void setEndPoint1(const QPointF& p1) { this->p1 = p1; }
 	void setEndPoint2(const QPointF& p2) { this->p2 = p2; }
 	void setEndPoint3(const QPointF& p3) { this->p3 = p3; }

@@ -8,7 +8,8 @@ uint32_t GraphicCircle::s_id = 0;
 
 void GraphicCircle::render(SDL_Renderer* renderer, const QTransform& transform)
 {
-	QPointF vCenter = transform.map(center);
+	QPointF mCenter = m_modelTrans.map(center);
+	QPointF vCenter = transform.map(mCenter);
 	double vRadius = radius * transform.m11();
 	//double left = vCenter.x() - vRadius;
 	//double right = vCenter.x() + vRadius;

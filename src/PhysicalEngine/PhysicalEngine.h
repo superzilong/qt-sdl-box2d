@@ -3,6 +3,8 @@
 #include <vector>
 #include <box2d/box2d.h>
 
+class GraphicTriangle;
+class GraphicCircle;
 class GraphicItem;
 class GraphicRect;
 
@@ -17,6 +19,8 @@ public:
 
 	b2Body* createGroundBox(GraphicRect* box);
 	b2Body* createDynamicBox(GraphicRect* box, float density = 1.0f, float friction = 0.3f);
+	b2Body* createDynamicCircle(GraphicCircle* circle, float density = 1.0f, float friction = 0.3f);
+	b2Body* createDynamicTriangle(GraphicTriangle* tri, float density = 1.0f, float friction = 0.3f);
 	void step(float timeStep = 1.f / 60.f, int velocityIterations = 6, int positionIterations = 2);
 
 	void start() { m_isRunning = true; }
