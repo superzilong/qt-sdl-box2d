@@ -1,3 +1,8 @@
+## Prerequisite
+* conan
+* cmake
+* Visual Studio 2017(or later)
+
 ## Steps to compile
 
 ```bash
