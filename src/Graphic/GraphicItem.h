@@ -52,12 +52,12 @@ public:
 
 	QTransform getTrans() const
 	{
-		return m_trans;
+		return m_modelTrans;
 	}
 
-	void setTrans(const QTransform& trans)
+	void setModelTrans(const QTransform& trans)
 	{
-		m_trans = trans;
+		m_modelTrans = trans;
 	}
 
 	virtual void render(SDL_Renderer* renderer, const QTransform& transform) = 0;
@@ -66,5 +66,5 @@ protected:
 	uint32_t id;
 	std::string name;
 	Type type = Type::none;
-	QTransform m_trans;
+	QTransform m_modelTrans;
 };

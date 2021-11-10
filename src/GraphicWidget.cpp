@@ -65,6 +65,15 @@ void GraphicWidget::Init()
 	m_projectTransfrom.translate(w / 2, h / 2);
 	m_projectTransfrom.scale(1, -1);
 
+	auto groundBox = new GraphicRect();
+	groundBox->setLeft(-50.);
+	groundBox->setBottom(-20.);
+	groundBox->setWidth(100);
+	groundBox->setHeight(20);
+	groundBox->setColor(217, 217, 217);
+	GraphicItemManager::instance()->addItem(groundBox);
+	PhysicalEngine::instance()->createGroundBox(groundBox);
+
 	auto axis_x = new GraphicRect();
 	axis_x->setLeft(-1);
 	axis_x->setBottom(-0.06);
@@ -86,15 +95,6 @@ void GraphicWidget::Init()
 	center->setRadius(0.15);
 	center->setColor(0, 0, 0);
 	GraphicItemManager::instance()->addItem(center);
-
-	auto groundBox = new GraphicRect();
-	groundBox->setLeft(-50.);
-	groundBox->setBottom(-20.);
-	groundBox->setWidth(100);
-	groundBox->setHeight(20);
-	GraphicItemManager::instance()->addItem(groundBox);
-
-	PhysicalEngine::instance()->createGroundBox(groundBox);
 }
 
 void GraphicWidget::Update() {
@@ -103,7 +103,6 @@ void GraphicWidget::Update() {
 	{
 		physicalEngine->step();// Use default 60 FPS.
 	}
-	
 	
 	auto mgr = GraphicItemManager::instance();
 	auto items = mgr->getItems();

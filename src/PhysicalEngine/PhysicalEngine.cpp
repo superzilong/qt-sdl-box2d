@@ -76,9 +76,18 @@ void PhysicalEngine::step(float timeStep, int velocityIterations, int positionIt
 			//QTransform qTrans;
 			//qTrans.rotate(b2Trans.q.GetAngle());
 			//item.second;
-			LOG_INFO(fmt::format("Motion x: {}", b2Trans.p.x));
-			LOG_INFO(fmt::format("Motion y: {}", b2Trans.p.y));
-			LOG_INFO(fmt::format("Rotation: {}", b2Trans.q.GetAngle()));
+			LOG_INFO("Motion x: {}", b2Trans.p.x);
+			LOG_INFO("Motion y: {}", b2Trans.p.y);
+			LOG_INFO("Rotation: {}", b2Trans.q.GetAngle());
+			if (GraphicRect* rect = dynamic_cast<GraphicRect*>(item.second))
+			{
+				QTransform modelTransform;
+				modelTransform.translate(b2Trans.p.x, b2Trans.p.y);
+				modelTransform.rotateRadians(b2Trans.q.GetAngle());
+				QPointF center = rect->getCenter();
+				modelTransform.translate(- center.x(), - center.y());
+				rect->setModelTrans(modelTransform);
+			}
 		}
 	}
 }
